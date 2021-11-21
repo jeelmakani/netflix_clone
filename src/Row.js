@@ -6,7 +6,7 @@ import movieTrailer from "movie-trailer";
 
 const baseUrl = "https://image.tmdb.org/t/p/original";
 
-function Row({ title, fetchUrl, isLargeRow }) {
+function Row({ title, fetchUrl, isLargeRow, notify }) {
   const [movies, setMovies] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
 
@@ -28,15 +28,20 @@ function Row({ title, fetchUrl, isLargeRow }) {
   };
 
   const handleClick = (movie) => {
+    debugger;
     if (trailerUrl) {
       setTrailerUrl("");
     } else {
       movieTrailer(movie?.name || "")
         .then((url) => {
+          if (!url) {
+            notify("Trailer not Found");
+          }
           const urlParams = new URLSearchParams(new URL(url).search);
           setTrailerUrl(urlParams.get("v"));
         })
-        .catch((error) 
+        .catch((error) => console.log(error));
+    }
   };
 
   return (

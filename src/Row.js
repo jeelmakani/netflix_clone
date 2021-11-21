@@ -3,8 +3,47 @@ import instance from "./axios";
 import "./Row.css";
 import YouTube from "react-youtube";
 import movieTrailer from "movie-trailer";
+import requests from "./Requests";
 
 const baseUrl = "https://image.tmdb.org/t/p/original";
+const rows = [
+  {
+    title: "NETFLIX ORIGINALS",
+    fetchUrl: requests.fetchNetflixOriginals,
+    isLargeRow: true,
+  },
+  {
+    title: "TRENDING NOW",
+    fetchUrl: requests.fetchTrending,
+    isLargeRow: false,
+  },
+  { title: "TOP RATED", fetchUrl: requests.fetchTopRated, isLargeRow: false },
+  {
+    title: "ACTION MOVIES",
+    fetchUrl: requests.fetchActionMovies,
+    isLargeRow: false,
+  },
+  {
+    title: "COMEDY MOVIES",
+    fetchUrl: requests.fetchComedyMovies,
+    isLargeRow: false,
+  },
+  {
+    title: "HORROR MOVIES",
+    fetchUrl: requests.fetchHorrorMovies,
+    isLargeRow: false,
+  },
+  {
+    title: "ROMANCE MOVIES",
+    fetchUrl: requests.fetchRomanceMovies,
+    isLargeRow: false,
+  },
+  {
+    title: "DOCUMENTARIES",
+    fetchUrl: requests.fetchDocumentaries,
+    isLargeRow: false,
+  },
+];
 
 function Row({ title, fetchUrl, isLargeRow, notify }) {
   const [movies, setMovies] = useState([]);
